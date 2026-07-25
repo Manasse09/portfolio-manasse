@@ -1,0 +1,148 @@
+{
+  "basics": {
+    "name": "Hariniaina Manassé",
+    "label": "Étudiant en Informatique | Développeur Web",
+    "image": "/me_avatar.jpg",
+    "email": "manassegilberto@gmail.com",
+    "phone": "033 24 788 22",
+    "url": "https://hariniaina-manasse",
+    "summary": "Étudiant en 2ème année de Licence Professionnelle en Informatique, curieux et motivé par la conception de sites et d'applications. À travers mes projets académiques et personnels, j'ai appris à développer aussi bien pour le web (HTML, CSS, JavaScript, PHP) que pour le bureau (VB6, WinDev), tout en manipulant les bases de données avec SQL et MySQL. Rigoureux et autonome, j'aime comprendre le fonctionnement des choses en profondeur et je suis toujours partant pour apprendre de nouveaux outils et relever de nouveaux défis.",
+    "theme": "blue",
+    "location": {
+      "address": "0508 E 62 Marodinta",
+      "postalCode": "110",
+      "city": "Antsirabe",
+      "countryCode": "MG",
+      "region": "Madagascar"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "Hariniaina Manassé",
+        "url": "https://www.linkedin.com/in/hariniaina-manass%C3%A9-b14796424?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
+      },
+      {
+        "network": "X",
+        "username": "Hariniaina Manassé",
+        "url": "https://x.com/manasse261?s=11"
+      },
+      {
+        "network": "GitHub",
+        "username": "Hariniaina Manassé",
+        "url": "https://github.com/Manasse09"
+      }
+    ]
+  },
+  "work": [],
+  "education": [
+    {
+      "institution": "IFT - Institution de Formation Technique, Antsirabe",
+      "url": "",
+      "area": "Licence Professionnelle II - Informatique (en cours)",
+      "studyType": "Licence Professionnelle",
+      "startDate": "2025-09-01",
+      "endDate": null,
+      "score": "",
+      "courses": []
+    },
+    {
+      "institution": "IFT - Institution de Formation Technique, Antsirabe",
+      "url": "",
+      "area": "Licence Professionnelle I - Informatique",
+      "studyType": "Licence Professionnelle",
+      "startDate": "2024-09-01",
+      "endDate": "2025-06-01",
+      "score": "",
+      "courses": []
+    },
+    {
+      "institution": "Cours ACEEM, Antsirabe",
+      "url": "",
+      "area": "Baccalauréat - Série A2 (Mention Assez Bien)",
+      "studyType": "Baccalauréat",
+      "startDate": "2023-01-01",
+      "endDate": "2023-01-01",
+      "score": "",
+      "courses": []
+    }
+  ],
+  "certificates": [],
+  "skills": [
+    { "name": "HTML & CSS", "level": "Intermédiaire", "category": "Développement Web", "keywords": ["Frontend"] },
+    { "name": "JavaScript", "level": "Intermédiaire", "category": "Développement Web", "keywords": ["Frontend"] },
+    { "name": "PHP", "level": "Intermédiaire", "category": "Développement Web", "keywords": ["Backend"] },
+
+    { "name": "C", "level": "Intermédiaire", "category": "Langage", "keywords": ["Programmation"] },
+    { "name": "C++", "level": "Intermédiaire", "category": "Langage", "keywords": ["Programmation"] },
+    { "name": "C++ (POO)", "level": "Intermédiaire", "category": "Langage", "keywords": ["Programmation orientée objet"] },
+    { "name": "VB6", "level": "Intermédiaire", "category": "Langage", "keywords": ["Applications de bureau"] },
+    { "name": "WinDev", "level": "Intermédiaire", "category": "Langage", "keywords": ["Applications de bureau"] },
+
+    { "name": "SQL", "level": "Intermédiaire", "category": "Base de données", "keywords": ["Requêtes"] },
+    { "name": "MySQL", "level": "Intermédiaire", "category": "Base de données", "keywords": ["SGBD"] },
+
+    { "name": "VS Code", "level": "Avancé", "category": "Outil", "keywords": ["Éditeur de code"] },
+    { "name": "GitHub", "level": "Intermédiaire", "category": "Outil", "keywords": ["Versionning"] },
+    { "name": "XAMPP", "level": "Intermédiaire", "category": "Outil", "keywords": ["Serveur local"] },
+    { "name": "WampServer", "level": "Intermédiaire", "category": "Outil", "keywords": ["Serveur local"] },
+    { "name": "Photoshop", "level": "Intermédiaire", "category": "Outil", "keywords": ["Design"] },
+
+    { "name": "InfinityFree", "level": "Intermédiaire", "category": "Hébergement", "keywords": ["Hébergement web"] }
+  ],
+  "languages": [
+    { "language": "Malagasy", "fluency": "Langue maternelle" },
+    { "language": "Français", "fluency": "Courant" },
+    { "language": "Anglais", "fluency": "Intermédiaire" }
+  ],
+  "interests": [],
+  "references": [],
+  "projects": [
+    {
+      "name": "Innov Forum - Forum étudiant",
+      "isActive": true,
+      "description": "Un forum en ligne destiné aux étudiants pour échanger, poser des questions et partager des ressources. Développé avec PHP, JavaScript, HTML et CSS.",
+      "highlights": [
+        "Système de discussion et de publication de sujets",
+        "Développé en PHP, JavaScript, HTML & CSS"
+      ],
+      "url": "https://innov-forum.rf.gd/"
+    },
+    {
+      "name": "Madagascar : Richesses et Diversités",
+      "isActive": false,
+      "description": "Un site vitrine présentant les richesses naturelles et culturelles de Madagascar. Réalisé avec HTML, CSS et JavaScript. L'hébergement du site est en cours.",
+      "highlights": [
+        "Site vitrine informatif et visuel",
+        "Développé en HTML, CSS & JavaScript",
+        "Mise en ligne prochainement"
+      ]
+    },
+    {
+      "name": "Jeu Labyrinthe",
+      "isActive": false,
+      "description": "Un jeu de labyrinthe développé en VB6, dans lequel le joueur doit se déplacer et trouver la sortie tout en évitant les obstacles.",
+      "highlights": [
+        "Développé en VB6",
+        "Gestion des déplacements et des collisions"
+      ]
+    },
+    {
+      "name": "Gestion de Vente",
+      "isActive": false,
+      "description": "Une application de gestion de vente développée en VB6, permettant d'enregistrer les produits, les ventes et de suivre les stocks.",
+      "highlights": [
+        "Développé en VB6",
+        "Gestion des produits, des ventes et des stocks"
+      ]
+    },
+    {
+      "name": "Portfolio Personnel",
+      "isActive": false,
+      "description": "Ce portfolio, conçu pour présenter mon profil, mes compétences et mes projets académiques et personnels.",
+      "highlights": [
+        "Développé avec Astro, Tailwind CSS et Alpine.js",
+        "Design responsive et thème clair/sombre"
+      ]
+    }
+  ]
+}

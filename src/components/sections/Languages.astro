@@ -1,0 +1,26 @@
+---
+import Section from "../Section.astro";
+import WorldMap from "@/icons/WorldMap.astro";
+import { languages } from "@cv";
+---
+
+{
+	languages && languages.length > 0 && (
+		<Section className={Astro.props.className} title="Langues">
+			<ul class="flex flex-wrap gap-2">
+				{languages.map(({ language, fluency }: { language: string; fluency?: string }, index: number) => (
+					<li
+						class="hover-lift reveal border-skin-hue/20 bg-skin-button-accent/20 flex items-center gap-2 rounded-md border border-solid px-3 py-1.5 text-sm text-skin-base transition-all duration-200 ease-out hover:-translate-y-0.5 hover:scale-105 hover:border-skin-hue/60 hover:bg-skin-button-accent/40 hover:shadow-sm print:border-none print:bg-transparent print:p-0 print:text-zinc-800 print:hover:translate-y-0 print:hover:scale-100"
+						style={`--reveal-delay: ${index * 90}ms`}
+					>
+						<span class="text-skin-hue">
+							<WorldMap />
+						</span>
+						<span class="font-medium">{language}</span>
+						{fluency && <span class="text-xs text-skin-muted">· {fluency}</span>}
+					</li>
+				))}
+			</ul>
+		</Section>
+	)
+}

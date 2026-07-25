@@ -1,0 +1,49 @@
+---
+const { className, title } = Astro.props;
+---
+
+<section class:list={["flex flex-col gap-4 print:gap-0", className]}>
+	{
+		title && (
+			<h3 class="section-title relative flex w-full items-center gap-3 pb-4 text-3xl print:gap-1 print:pb-0 print:text-xl">
+				{title}
+			</h3>
+		)
+	}
+	<slot />
+</section>
+
+<style>
+	.section-title::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		bottom: 0.5rem;
+		height: 3px;
+		width: 2.5rem;
+		border-radius: 999px;
+		background-color: var(--color-accent);
+		transform-origin: left;
+		transform: scaleX(0);
+		animation: draw-underline 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+	}
+
+	@keyframes draw-underline {
+		to {
+			transform: scaleX(1);
+		}
+	}
+
+	@media print {
+		.section-title::after {
+			display: none;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.section-title::after {
+			animation: none;
+			transform: scaleX(1);
+		}
+	}
+</style>

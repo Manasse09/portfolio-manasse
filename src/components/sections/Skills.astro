@@ -1,0 +1,78 @@
+---
+import Section from "../Section.astro";
+import HTML from "@/icons/html.astro";
+import CSS from "@/icons/css.astro";
+import JavaScript from "@/icons/javascript.astro";
+import MySQL from "@/icons/mysql.astro";
+import SQLIcon from "@/icons/sql.astro";
+import GitHub from "@/icons/GitHub.astro";
+import { skills } from "@cv";
+import C from "@/icons/c.astro";
+import Cpp from "@/icons/cpp.astro";
+import PHP from "@/icons/php.astro";
+import VSCode from "@/icons/vscode.astro";
+import Photoshop from "@/icons/photoshop.astro";
+import XAMPP from "@/icons/xampp.astro";
+import WampServer from "@/icons/wampserver.astro";
+import WinDev from "@/icons/windev.astro";
+import VB6 from "@/icons/vb6.astro";
+import InfinityFree from "@/icons/infinityfree.astro";
+
+// Correspondance directe nom de compétence -> icône (gère les noms composés comme "HTML & CSS")
+const SKILL_NAME_ICONS: Record<string, any> = {
+	"HTML & CSS": HTML,
+	HTML: HTML,
+	CSS: CSS,
+	JavaScript,
+	PHP,
+	C,
+	"C++": Cpp,
+	"C++ (POO)": Cpp,
+	VB6,
+	WinDev,
+	SQL: SQLIcon,
+	MySQL,
+	"VS Code": VSCode,
+	GitHub,
+	XAMPP,
+	WampServer,
+	Photoshop,
+	InfinityFree,
+};
+
+// Regroupe les compétences par catégorie (Développement Web, Langage, Base de données, Outil, Hébergement)
+const CATEGORY_ORDER = ["Développement Web", "Langage", "Base de données", "Outil", "Hébergement"];
+
+const groupedSkills = CATEGORY_ORDER.map((category) => ({
+	category,
+	items: skills.filter((skill: any) => (skill.category ?? "Autre") === category),
+})).filter((group) => group.items.length > 0);
+
+const uncategorized = skills.filter((skill: any) => !CATEGORY_ORDER.includes(skill.category ?? ""));
+if (uncategorized.length > 0) {
+	groupedSkills.push({ category: "Autre", items: uncategorized });
+}
+---
+
+<Section className={Astro.props.className} title="Compétences">
+	<div class="flex flex-col gap-5">
+		{
+			groupedSkills.map(({ category, items }, groupIndex) => (
+				<div class="flex flex-col gap-2 reveal" style={`--reveal-delay: ${groupIndex * 90}ms`}>
+					<h4 class="text-xs font-semibold uppercase tracking-wide text-skin-muted">{category}</h4>
+					<ul class="[&>li>svg]:text-skin-hue inline-flex flex-wrap gap-2 [&>li>svg]:size-5 [&>li]:text-sm">
+						{items.map(({ name }: { name: string }) => {
+							const Icon = SKILL_NAME_ICONS[name];
+
+							return (
+								<li class="skill-tag border-skin-hue/20 bg-skin-button-accent/20 flex items-center gap-1 rounded-md border border-solid px-2 py-0.5 text-xs text-skin-muted transition-all duration-200 ease-out hover:-translate-y-0.5 hover:scale-105 hover:border-skin-hue/60 hover:bg-skin-button-accent/40 hover:text-skin-base hover:shadow-sm print:border-none print:bg-transparent print:p-0 print:text-zinc-800 print:hover:translate-y-0 print:hover:scale-100">
+									{Icon && <Icon />} <span>{name}</span>
+								</li>
+							);
+						})}
+					</ul>
+				</div>
+			))
+		}
+	</div>
+</Section>
