@@ -12,10 +12,15 @@ import type { SocialIcon } from "@/types";
 const { name, label, image, location, profiles, phone, email } = basics;
 const { city, region } = location;
 
+// CORRECTION POUR L'IMAGE DE PROFIL ET BASE_URL
+const avatarUrl = image?.startsWith("http")
+  ? image
+  : `${import.meta.env.BASE_URL}${image?.replace(/^\//, "")}`;
+
 const SOCIAL_ICONS: SocialIcon = {
-	GitHub,
-	LinkedIn,
-	X,
+    GitHub,
+    LinkedIn,
+    X,
 };
 
 const linkedInfo = profiles.find(({ network }) => network === "LinkedIn");
@@ -25,307 +30,310 @@ const printInfo = [email, phone, linkedUrl].filter(Boolean).join(" • ");
 ---
 
 <Section>
-	<div class="flex flex-col-reverse gap-8">
-		<div class="info">
-			<h1 class="reveal" style="--reveal-delay: 0ms">{name}</h1>
-			<h2 class="reveal" style="--reveal-delay: 90ms">{label}</h2>
-			<div class="reveal flex items-center gap-2 pt-2 text-sm text-skin-muted" style="--reveal-delay: 160ms">
-				<WorldMap />
-				{city}, {region}
-			</div>
-			<footer class="print">
-				{printInfo}
-			</footer>
-			<footer class="no-print reveal" style="--reveal-delay: 220ms">
-				{
-					email && (
-						<div x-data=`{ copyText: '${email}', copyNotification: false, copyToClipboard() { navigator.clipboard.writeText(this.copyText); this.copyNotification = true; let that = this; setTimeout(function(){ that.copyNotification = false; }, 3000); } }` class="relative flex items-center">
-							<div x-show="copyNotification" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-3" x-transition:enter-end="opacity-100 translate-x-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-x-0" x-transition:leave-end="opacity-0 translate-y-2" style="display:none;" class="absolute left-0" x-cloak>
-								<div class="-mt-1.5 flex h-7 -translate-y-full items-center rounded border-r border-green-500 bg-green-500 px-3 text-xs text-white">
-									<span class="!text-white">Copié !</span>
-									<div class="absolute left-0 bottom-0 inline-block h-full translate-x-full translate-y-5 overflow-hidden">
-										<div class="h-3 w-3 origin-center rotate-45 transform border border-transparent bg-green-500" />
-									</div>
-								</div>
-							</div>
-							<button @click="copyToClipboard();" class="group flex h-8 w-9 cursor-pointer items-center justify-center rounded-md text-skin-muted hover:bg-skin-button-accent hover:text-skin-inverted [&>span]:hover:text-skin-inverted">
-								<svg x-show="copyNotification" class="h-4 w-4 stroke-current text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" x-cloak>
-									<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-								</svg>
-								<span x-show="!copyNotification" style="color: inherit;">
-									<Mail />
-								</span>
-							</button>
-						</div>
-					)
-				}
-				{
-					phone && (
-						<a href={`tel:${phone}`} title={`Appeler ${name} au ${phone}`} target="_blank" rel="noopener noreferrer">
-							<Phone />
-						</a>
-					)
-				}
-				{
-					profiles.map(({ network, url }) => {
-						const Icon = SOCIAL_ICONS[network];
+    <div class="flex flex-col-reverse gap-8">
+        <div class="info">
+            <h1 class="reveal" style="--reveal-delay: 0ms">{name}</h1>
+            <h2 class="reveal" style="--reveal-delay: 90ms">{label}</h2>
+            <div class="reveal flex items-center gap-2 pt-2 text-sm text-skin-muted" style="--reveal-delay: 160ms">
+                <WorldMap />
+                {city}, {region}
+            </div>
+            <footer class="print">
+                {printInfo}
+            </footer>
+            <footer class="no-print reveal" style="--reveal-delay: 220ms">
+                {
+                    email && (
+                        <div x-data=`{ copyText: '${email}', copyNotification: false, copyToClipboard() { navigator.clipboard.writeText(this.copyText); this.copyNotification = true; let that = this; setTimeout(function(){ that.copyNotification = false; }, 3000); } }` class="relative flex items-center">
+                            <div x-show="copyNotification" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-3" x-transition:enter-end="opacity-100 translate-x-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-x-0" x-transition:leave-end="opacity-0 translate-y-2" style="display:none;" class="absolute left-0" x-cloak>
+                                <div class="-mt-1.5 flex h-7 -translate-y-full items-center rounded border-r border-green-500 bg-green-500 px-3 text-xs text-white">
+                                    <span class="!text-white">Copié !</span>
+                                    <div class="absolute left-0 bottom-0 inline-block h-full translate-x-full translate-y-5 overflow-hidden">
+                                        <div class="h-3 w-3 origin-center rotate-45 transform border border-transparent bg-green-500" />
+                                    </div>
+                                </div>
+                            </div>
+                            <button @click="copyToClipboard();" class="group flex h-8 w-9 cursor-pointer items-center justify-center rounded-md text-skin-muted hover:bg-skin-button-accent hover:text-skin-inverted [&>span]:hover:text-skin-inverted">
+                                <svg x-show="copyNotification" class="h-4 w-4 stroke-current text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" x-cloak>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                </svg>
+                                <span x-show="!copyNotification" style="color: inherit;">
+                                    <Mail />
+                                </span>
+                            </button>
+                        </div>
+                    )
+                }
+                {
+                    phone && (
+                        <a href={`tel:${phone}`} title={`Appeler ${name} au ${phone}`} target="_blank" rel="noopener noreferrer">
+                            <Phone />
+                        </a>
+                    )
+                }
+                {
+                    profiles.map(({ network, url }) => {
+                        const Icon = SOCIAL_ICONS[network];
 
-						return (
-							<a href={url} title={`Voir le profil ${network} de ${name}`} target="_blank" rel="noopener noreferrer">
-								<Icon />
-							</a>
-						);
-					})
-				}
-				<div class="no-print footer-button max-sm:hidden group flex h-8 w-9 cursor-pointer items-center justify-center rounded-md text-skin-hue hover:bg-skin-button-accent hover:text-skin-inverted [&>span]:hover:text-skin-inverted">
-					<svg xmlns="http://www.w3.org/2000/svg" class="icon h-6 w-6 icon-tabler icon-tabler-command"  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-						<path d="M7 9a2 2 0 1 1 2 -2v10a2 2 0 1 1 -2 -2h10a2 2 0 1 1 -2 2v-10a2 2 0 1 1 2 2h-10"></path>
-					</svg>
-				</div>
-			</footer>
-		</div>
-		<figure class="avatar-frame print:hidden reveal w-fit relative" style="--reveal-delay: 40ms">
-			<div class="avatar-halo pointer-events-none absolute -inset-3 -z-10 rounded-[1.4rem]"></div>
-			<img class="shadow-lg shadow-skin-hues transition-transform duration-500 ease-out hover:scale-[1.03]" src={image} alt={name} />
-			<div class="pointer-events-none absolute -inset-2">
-				<div class="frame-line frame-line--right absolute -inset-y-8 right-0 w-px bg-skin-hue/50 [mask-image:linear-gradient(to_top,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
-				<div class="frame-line frame-line--left absolute -inset-y-8 left-0 w-px bg-skin-hue/50 [mask-image:linear-gradient(to_top,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
-				<div class="frame-line frame-line--bottom absolute -inset-x-8 bottom-0 h-px bg-skin-hue/50 [mask-image:linear-gradient(to_left,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
-				<div class="frame-line frame-line--top absolute -inset-x-8 top-0 h-px bg-skin-hue/50 [mask-image:linear-gradient(to_left,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
-			</div>
-		</figure>
-	</div>
+                        return (
+                            <a href={url} title={`Voir le profil ${network} de ${name}`} target="_blank" rel="noopener noreferrer">
+                                <Icon />
+                            </a>
+                        );
+                    })
+                }
+                <div class="no-print footer-button max-sm:hidden group flex h-8 w-9 cursor-pointer items-center justify-center rounded-md text-skin-hue hover:bg-skin-button-accent hover:text-skin-inverted [&>span]:hover:text-skin-inverted">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon h-6 w-6 icon-tabler icon-tabler-command"  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M7 9a2 2 0 1 1 2 -2v10a2 2 0 1 1 -2 -2h10a2 2 0 1 1 -2 2v-10a2 2 0 1 1 2 2h-10"></path>
+                    </svg>
+                </div>
+            </footer>
+        </div>
+        <figure class="avatar-frame print:hidden reveal w-fit relative" style="--reveal-delay: 40ms">
+            <div class="avatar-halo pointer-events-none absolute -inset-3 -z-10 rounded-[1.4rem]"></div>
+            
+            <!-- UTILISATION DE avatarUrl -->
+            <img class="shadow-lg shadow-skin-hues transition-transform duration-500 ease-out hover:scale-[1.03]" src={avatarUrl} alt={name} />
+            
+            <div class="pointer-events-none absolute -inset-2">
+                <div class="frame-line frame-line--right absolute -inset-y-8 right-0 w-px bg-skin-hue/50 [mask-image:linear-gradient(to_top,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
+                <div class="frame-line frame-line--left absolute -inset-y-8 left-0 w-px bg-skin-hue/50 [mask-image:linear-gradient(to_top,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
+                <div class="frame-line frame-line--bottom absolute -inset-x-8 bottom-0 h-px bg-skin-hue/50 [mask-image:linear-gradient(to_left,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
+                <div class="frame-line frame-line--top absolute -inset-x-8 top-0 h-px bg-skin-hue/50 [mask-image:linear-gradient(to_left,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
+            </div>
+        </figure>
+    </div>
 </Section>
 
 <style>
-	.info {
-		display: flex;
-		flex-direction: column;
-		gap: 0.25rem;
-		padding-right: 2rem;
-	}
+    .info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        padding-right: 2rem;
+    }
 
-	@media print {
-		.info {
-			gap: 0;
-			padding-right: 0;
-		}
-	}
+    @media print {
+        .info {
+            gap: 0;
+            padding-right: 0;
+        }
+    }
 
-	h1 {
-		font-size: 2.25rem;
-		line-height: 2.5rem;
-		font-weight: 700;
-	}
+    h1 {
+        font-size: 2.25rem;
+        line-height: 2.5rem;
+        font-weight: 700;
+    }
 
-	@media print {
-		h1 {
-			font-size: 1.875rem;
-			line-height: 2.25rem;
-		}
-	}
+    @media print {
+        h1 {
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+        }
+    }
 
-	h2 {
-		text-wrap: balance;
-		font-size: 1rem;
-		line-height: 1.5rem;
-		color: var(--color-text-muted);
-	}
+    h2 {
+        text-wrap: balance;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        color: var(--color-text-muted);
+    }
 
-	@media print {
-		h2 {
-			font-size: 1.125rem;
-			line-height: 1.75rem;
-		}
-	}
+    @media print {
+        h2 {
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+        }
+    }
 
-	img {
-		aspect-ratio: 1 / 1;
-		width: 8rem;
-		border-radius: 1rem;
-		background-size: cover;
-	}
+    img {
+        aspect-ratio: 1 / 1;
+        width: 8rem;
+        border-radius: 1rem;
+        background-size: cover;
+    }
 
-	/* Halo lumineux permanent qui tourne derrière la photo */
-	.avatar-halo {
-		background: conic-gradient(from 0deg, transparent 0deg, var(--color-accent) 90deg, transparent 200deg, var(--color-accent) 300deg, transparent 360deg);
-		filter: blur(16px);
-		opacity: 0.55;
-		animation: avatar-halo-spin 6s linear infinite;
-	}
+    /* Halo lumineux permanent qui tourne derrière la photo */
+    .avatar-halo {
+        background: conic-gradient(from 0deg, transparent 0deg, var(--color-accent) 90deg, transparent 200deg, var(--color-accent) 300deg, transparent 360deg);
+        filter: blur(16px);
+        opacity: 0.55;
+        animation: avatar-halo-spin 6s linear infinite;
+    }
 
-	@keyframes avatar-halo-spin {
-		to {
-			transform: rotate(360deg);
-		}
-	}
+    @keyframes avatar-halo-spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
 
-	/* Lumière qui parcourt en continu chaque bord du cadre, dans le sens des aiguilles d'une montre */
-	.frame-line {
-		background-size: 100% 100%;
-		background-repeat: no-repeat;
-	}
+    /* Lumière qui parcourt en continu chaque bord du cadre, dans le sens des aiguilles d'une montre */
+    .frame-line {
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
 
-	.frame-line--top,
-	.frame-line--bottom {
-		background-size: 250% 100%;
-	}
+    .frame-line--top,
+    .frame-line--bottom {
+        background-size: 250% 100%;
+    }
 
-	.frame-line--left,
-	.frame-line--right {
-		background-size: 100% 250%;
-	}
+    .frame-line--left,
+    .frame-line--right {
+        background-size: 100% 250%;
+    }
 
-	.frame-line--top {
-		background-image: linear-gradient(to right, transparent 0%, var(--color-accent) 12%, transparent 24%);
-		animation: frame-travel-h 3.2s linear infinite;
-		animation-delay: 0s;
-	}
+    .frame-line--top {
+        background-image: linear-gradient(to right, transparent 0%, var(--color-accent) 12%, transparent 24%);
+        animation: frame-travel-h 3.2s linear infinite;
+        animation-delay: 0s;
+    }
 
-	.frame-line--right {
-		background-image: linear-gradient(to bottom, transparent 0%, var(--color-accent) 12%, transparent 24%);
-		animation: frame-travel-v 3.2s linear infinite;
-		animation-delay: 0.8s;
-	}
+    .frame-line--right {
+        background-image: linear-gradient(to bottom, transparent 0%, var(--color-accent) 12%, transparent 24%);
+        animation: frame-travel-v 3.2s linear infinite;
+        animation-delay: 0.8s;
+    }
 
-	.frame-line--bottom {
-		background-image: linear-gradient(to left, transparent 0%, var(--color-accent) 12%, transparent 24%);
-		animation: frame-travel-h-reverse 3.2s linear infinite;
-		animation-delay: 1.6s;
-	}
+    .frame-line--bottom {
+        background-image: linear-gradient(to left, transparent 0%, var(--color-accent) 12%, transparent 24%);
+        animation: frame-travel-h-reverse 3.2s linear infinite;
+        animation-delay: 1.6s;
+    }
 
-	.frame-line--left {
-		background-image: linear-gradient(to top, transparent 0%, var(--color-accent) 12%, transparent 24%);
-		animation: frame-travel-v-reverse 3.2s linear infinite;
-		animation-delay: 2.4s;
-	}
+    .frame-line--left {
+        background-image: linear-gradient(to top, transparent 0%, var(--color-accent) 12%, transparent 24%);
+        animation: frame-travel-v-reverse 3.2s linear infinite;
+        animation-delay: 2.4s;
+    }
 
-	@keyframes frame-travel-h {
-		from {
-			background-position: -100% 0%;
-		}
-		to {
-			background-position: 100% 0%;
-		}
-	}
+    @keyframes frame-travel-h {
+        from {
+            background-position: -100% 0%;
+        }
+        to {
+            background-position: 100% 0%;
+        }
+    }
 
-	@keyframes frame-travel-h-reverse {
-		from {
-			background-position: 100% 0%;
-		}
-		to {
-			background-position: -100% 0%;
-		}
-	}
+    @keyframes frame-travel-h-reverse {
+        from {
+            background-position: 100% 0%;
+        }
+        to {
+            background-position: -100% 0%;
+        }
+    }
 
-	@keyframes frame-travel-v {
-		from {
-			background-position: 0% -100%;
-		}
-		to {
-			background-position: 0% 100%;
-		}
-	}
+    @keyframes frame-travel-v {
+        from {
+            background-position: 0% -100%;
+        }
+        to {
+            background-position: 0% 100%;
+        }
+    }
 
-	@keyframes frame-travel-v-reverse {
-		from {
-			background-position: 0% 100%;
-		}
-		to {
-			background-position: 0% -100%;
-		}
-	}
+    @keyframes frame-travel-v-reverse {
+        from {
+            background-position: 0% 100%;
+        }
+        to {
+            background-position: 0% -100%;
+        }
+    }
 
-	@media print {
-		.avatar-halo,
-		.frame-line {
-			animation: none !important;
-			display: none;
-		}
-	}
+    @media print {
+        .avatar-halo,
+        .frame-line {
+            animation: none !important;
+            display: none;
+        }
+    }
 
-	span {
-		display: flex;
-		align-items: center;
-		gap: 0.25rem;
-		font-size: 0.75rem;
-		line-height: 1rem;
-		color: var(--color-accent);
-	}
+    span {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        color: var(--color-accent);
+    }
 
-	footer {
-		margin-top: 0.5rem;
-		display: flex;
-		gap: 0.25rem;
-		font-size: 0.875rem;
-		line-height: 1.25rem;
-	}
+    footer {
+        margin-top: 0.5rem;
+        display: flex;
+        gap: 0.25rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+    }
 
-	footer a, footer button {
-		display: inline-flex;
-		width: 2rem;
-		height: 2rem;
-		align-items: center;
-		justify-content: center;
-		border-radius: 0.375rem;
-		padding: 0.25rem;
-		transition-property: all;
-		transition-timing-function: linear;
-		transition-duration: 500ms;
-		color: var(--color-accent);
-	}
+    footer a, footer button {
+        display: inline-flex;
+        width: 2rem;
+        height: 2rem;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.375rem;
+        padding: 0.25rem;
+        transition-property: all;
+        transition-timing-function: linear;
+        transition-duration: 500ms;
+        color: var(--color-accent);
+    }
 
-	footer a:hover, footer button:hover {
-		background-color: var(--color-button-accent);
-		color: var(--color-text-inverted);
-	}
+    footer a:hover, footer button:hover {
+        background-color: var(--color-button-accent);
+        color: var(--color-text-inverted);
+    }
 
-	@media (width <= 700px) {
-		.container {
-			flex-direction: column-reverse;
-		}
+    @media (width <= 700px) {
+        .container {
+            flex-direction: column-reverse;
+        }
 
-		.info {
-			padding-right: 0;
-		}
+        .info {
+            padding-right: 0;
+        }
 
-		h2 {
-			text-wrap: balance;
-		}
-	}
+        h2 {
+            text-wrap: balance;
+        }
+    }
 
-	@media (min-width: 768px) {
-		@media (width <= 700px) {
-			.info {
-				align-items: center;
-				justify-content: center;
-			}
+    @media (min-width: 768px) {
+        @media (width <= 700px) {
+            .info {
+                align-items: center;
+                justify-content: center;
+            }
 
-			figure {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				margin-left: auto;
-				margin-right: auto;
-			}
-		}
-	}
+            figure {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    }
 </style>
 
 <script>
-	// Handle print mode - remove dark theme when printing
-	const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    // Handle print mode - remove dark theme when printing
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 
-	window.addEventListener("beforeprint", () => {
-		document.documentElement.classList.remove("dark");
-	});
+    window.addEventListener("beforeprint", () => {
+        document.documentElement.classList.remove("dark");
+    });
 
-	window.addEventListener("afterprint", () => {
-		const savedTheme = localStorage.getItem("theme") || "system";
-		const effectiveTheme = savedTheme === "system" ? systemTheme : savedTheme;
-		if (effectiveTheme === "dark") {
-			document.documentElement.classList.add("dark");
-		}
-	});
+    window.addEventListener("afterprint", () => {
+        const savedTheme = localStorage.getItem("theme") || "system";
+        const effectiveTheme = savedTheme === "system" ? systemTheme : savedTheme;
+        if (effectiveTheme === "dark") {
+            document.documentElement.classList.add("dark");
+        }
+    });
 </script>
